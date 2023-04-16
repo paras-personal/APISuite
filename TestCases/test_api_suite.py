@@ -1,3 +1,4 @@
+import random
 import pytest
 from PageObjects.ApiSuite import ApiSuite
 
@@ -19,4 +20,6 @@ class TestApiSuite:
     @pytest.mark.Apisuite
     def test_get_all_pokemon_names(self):
         """APISuite::To get the pokemon name from the api """
-        self.obj.get_pokemon_names_from_api()
+        pokemon_id = random.randint(1, 1281)
+        name = self.obj.get_pokemon_names_from_api(pokemon_id)
+        assert type(name) is str, f"{pokemon_id} does not have any pokemon associated in API"
