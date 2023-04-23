@@ -11,10 +11,14 @@ class ApiSuite(PageBase):
         :param pokemon_id: ID of the Pokemon in the API
         :return: string
         """
-        self.log.info(f"Pokemon id is: {pokemon_id}")
-        response = requests.get(test_data.POKE_API_URL.format(id=pokemon_id))
-        data = response.json()
-        pokemon_name = data['name']
-        self.log.info(f"Pokemon name fetched from the API is: {pokemon_name}")
-        return pokemon_name
+        try:
+            self.log.info(f"Pokemon id is: {pokemon_id}")
+            response = requests.get(test_data.POKE_API_URL.format(id=pokemon_id))
+            data = response.json()
+            pokemon_name = data['name']
+            self.log.info(f"Pokemon name fetched from the API is: {pokemon_name}")
+        except Exception as e:
+            self.log.error(f"Exception occurred due to: {e}")
+        finally:
+            return pokemon_name
 
